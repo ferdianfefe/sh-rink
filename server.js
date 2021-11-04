@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 const urlRoute = require("./routes/url");
 const redirectRoute = require("./routes/redirect");
@@ -19,11 +20,15 @@ app.use(
     extended: false,
   })
 );
-
+app.use(express.static(path.join(__dirname, "public")));
 /* Routes */
 app.use("/", redirectRoute);
 app.use("/api/url", urlRoute);
 app.use("/api/auth", authRoute);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/index.html"));
+});
 
 const PORT = process.env.PORT || 3000;
 
