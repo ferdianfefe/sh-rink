@@ -32,7 +32,7 @@ router.post("/shorten", verifyToken, async (req, res) => {
         },
       });
     } else {
-      const shortUrl = "http://localhost:3000/" + urlCode;
+      const shortUrl = "https://sh-rink.herokuapp.com/" + urlCode;
 
       url = new Url({
         urlCode,
